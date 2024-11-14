@@ -27,19 +27,19 @@ Pairing your eQ-3 Bluetooth Smart Thermostat device works differently based on y
 
 #### [ESPHome Bluetooth Proxies](https://esphome.io/components/bluetooth_proxy.html)
 
-For firmware versions below 148 no additional configuration is required when using ESPHome Bluetooth Proxies.
-Since version 148 a security flaw in the devices has been fixed that now requires entering a passkey.
+For firmware versions below 148, no additional configuration is required when using ESPHome Bluetooth Proxies.
+Since version 148, a security flaw in the devices has been fixed that now requires entering a passkey.
 
 To configure the passkey, add the following to your ESPHome Bluetooth Proxy's configuration:
 
 ```yaml
 ble_client:
   - mac_address: <MAC>
-    id: ble_itag
+    id: my_eq3_thermostat
     on_passkey_request:
       then:
         - ble_client.passkey_reply:
-            id: ble_itag
+            id: my_eq3_thermostat
             passkey: <PIN code displayed on the thermostat. To display the PIN hold down the main button.>
 ```
 
@@ -53,12 +53,12 @@ Before configuring Home Assistant you need to pair the thermostat to your Blueto
 ```bash
 bluetoothctl
 scan on
-# Wait for the thermostat to show up and copy the MAC address.
-# It will look something like this: [NEW] Device 00:1A:23:27:F8:4E CC-RT-BLE
+# Wait for the thermostat to show up and copy its MAC address
+# Expected output: [NEW] Device 00:1A:23:27:F8:4E CC-RT-BLE
 scan off
 pair <MAC>
-# Input the PIN displayed on the thermostat.
-# To display the PIN hold down the main button.
+# Hold down the main button on the thermostat to display the PIN
+# Enter the displayed PIN when prompted
 trust <MAC>
 disconnect <MAC>
 exit
