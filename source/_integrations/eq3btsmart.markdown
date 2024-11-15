@@ -33,6 +33,9 @@ Since version 148, a security flaw in the devices has been fixed that now requir
 To configure the passkey, add the following to your ESPHome Bluetooth Proxy's configuration:
 
 ```yaml
+esp32_ble:
+  io_capability: keyboard_only
+
 ble_client:
   - mac_address: <MAC>
     id: my_eq3_thermostat
