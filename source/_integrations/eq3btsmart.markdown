@@ -39,6 +39,7 @@ esp32_ble:
 ble_client:
   - mac_address: <MAC>
     id: my_eq3_thermostat
+    auto_connect: true
     on_passkey_request:
       then:
         - ble_client.passkey_reply:
